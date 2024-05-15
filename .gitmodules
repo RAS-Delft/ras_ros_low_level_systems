@@ -1,0 +1,6 @@
+[submodule "ros_arduino_bridge/ros_micro_bridge"]
+	path = ros_arduino_bridge/ros_micro_bridge
+	url = https://github.com/RAS-Delft/ros_micro_bridge
+[submodule "ros_emlid_bridge/reach_ros_node"]
+	path = ros_emlid_bridge/reach_ros_node
+	url = https://github.com/RAS-Delft/reach_ros_node
