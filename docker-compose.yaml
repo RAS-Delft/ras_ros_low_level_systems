@@ -1,0 +1,18 @@
+services:
+  arduino_bridge:
+    build:
+      context: ./ros_arduino_bridge
+      dockerfile: Dockerfile
+    environment:
+      - VESSEL_ID=$VESSEL_ID
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+    container_name: ros_arduino_bridge
+  
+  emlid_bridge:
+    build:
+      context: ./ros_emlid_bridge
+      dockerfile: Dockerfile
+    environment:
+      - VESSEL_ID=$VESSEL_ID
+    container_name: ros_emlid_bridge
