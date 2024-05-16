@@ -4,3 +4,6 @@
 [submodule "ros_emlid_bridge/reach_ros_node"]
 	path = ros_emlid_bridge/reach_ros_node
 	url = https://github.com/RAS-Delft/reach_ros_node
+[submodule "microcontroller_driver/ras_main_micro_driver"]
+	path = microcontroller_driver/ras_main_micro_driver
+	url = https://github.com/RAS-Delft/ras_main_micro_driver
