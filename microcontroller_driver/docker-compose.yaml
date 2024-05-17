@@ -1,0 +1,8 @@
+services:
+  installer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    devices:
+      - /dev/ttyACM1:/dev/ttyACM0
+  
