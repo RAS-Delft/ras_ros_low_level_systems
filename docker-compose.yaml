@@ -5,8 +5,9 @@ services:
       dockerfile: Dockerfile
     environment:
       - VESSEL_ID=$VESSEL_ID
-    devices:
-      - /dev/ttyACM0:/dev/ttyACM0
+    privileged: true
+    volumes:
+      - /dev:/dev
     container_name: ros_arduino_bridge
   
   emlid_bridge:
