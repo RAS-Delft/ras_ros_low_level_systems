@@ -17,10 +17,6 @@ RUN pip install pyserial
 # Copy the boid_ros_pkg directory into container ros2_ws/src
 COPY ros_micro_bridge/. /ros2_ws/src/ros_micro_bridge
 
-# Copy entrypoint.sh into container and make it executable
-#COPY boid/entrypoint.sh /entrypoint.sh
-#RUN chmod +x /entrypoint.sh
-
 # Build the workspace
 RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
     cd /ros2_ws && \
