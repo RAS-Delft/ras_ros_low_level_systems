@@ -3,6 +3,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    devices:
-      - /dev/ttyACM1:/dev/ttyACM0
-  
+    privileged: true
+    volumes:
+      - /dev:/dev
+    container_name: microcontroller_installer
