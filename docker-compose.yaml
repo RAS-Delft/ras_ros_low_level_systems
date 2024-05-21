@@ -5,10 +5,12 @@ services:
       dockerfile: Dockerfile
     environment:
       - VESSEL_ID=$VESSEL_ID
+      - RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION
     privileged: true
     volumes:
       - /dev:/dev
     container_name: ros_arduino_bridge
+    network_mode: "host"     
   
   emlid_bridge:
     build:
@@ -16,4 +18,6 @@ services:
       dockerfile: Dockerfile
     environment:
       - VESSEL_ID=$VESSEL_ID
+      - RMW_IMPLEMENTATION=$RMW_IMPLEMENTATION
     container_name: ros_emlid_bridge
+    network_mode: "host"
