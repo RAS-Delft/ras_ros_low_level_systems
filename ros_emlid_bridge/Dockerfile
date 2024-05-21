@@ -16,5 +16,4 @@ RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
 # Set tasks to be run upon container startup
 CMD . /opt/ros/${ROS_DISTRO}/setup.sh && \
     . /ros2_ws/install/setup.sh && \
-    ros2 run reach_ros_node nmea_tcp_driver --ros-args -p host:="192.168.2.15" -p port:="9001" -p __ns:="/${VESSEL_ID}" -r tcpfix:=telemetry/gnss/fix
-    #ros2 run reach_ros_node nmea_tcp_driver --ros-args -p host:="192.168.2.15" -p port:="9001" -r tcpfix:=${VESSEL_ID}/telemetry/gnss/fix
+    ros2 run reach_ros_node nmea_tcp_driver --ros-args -p host:=192.168.2.15 -p port:=9001 -r __ns:=/RAS_TN_DB -r tcpfix:=telemetry/gnss/fix
