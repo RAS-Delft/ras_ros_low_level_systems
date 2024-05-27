@@ -15,13 +15,13 @@ Starting the main modules is done by:
 cd ras_ros_low_level_systems; docker compose up
 ```
 
-## Setup
+## Benchmark setup
 ### Installation of OS on on-board computer
 Install a recent linux distribution. You can choose a more minimalistic OS, or one with conveniencies such as a desktop GUI. 
 
 For Raspberry Pi's consider using the linux raspberry-pi-imager program from the software center. It's quite convenient. I used Ubuntu-Server-24.04LTS64bit image for RPI4B
 
-Consider what this distro is compatible with. Docker can give you flexibility in deploying modules, but if you want to run something specific, check if it is supported (e.g. check support for your envisioned ros distibution).
+Consider compatibilities with this distribution. Docker can give you flexibility in deploying modules, but if you want to run something specific, check if it is supported (e.g. check support for your envisioned ros distibution).
 
 Configure the network to connect to lab routers or VPN.
 
