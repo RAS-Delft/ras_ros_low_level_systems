@@ -85,6 +85,10 @@ export RAS_GH_USERNAME="ras-delft-user"
 export RAS_GH_KEY="<FILL IN ras-delft-user pull/write GITHUB KEY>"
 export RMW_IMPLEMENTATION="rmw_fastrtps_cpp"
 ```
+set vessel specific configuration
+```shell
+echo VESSEL_ID=RAS_TN_DB > vessel_id.env
+```
  Make sure this gets called upon bash startup by adding it to .bashrc with `nano` or 
 ```shell
 echo "source /home/ras/ras_entrypoint.sh" >> ~/.bashrc
