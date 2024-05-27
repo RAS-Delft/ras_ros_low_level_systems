@@ -109,6 +109,16 @@ docker compose build
 ```
 
 ### Microcontroller
-This device is responsible for executing desired actuation. 
+This device is responsible for executing desired actuation. Flashing the microcontroller can be done with starting the set-up docker container that 
+- autodetects usb port (defaults to device with Arduino in the name)
+- Installs flash software (platformIO) and required libraries in temporary container
+- flashes the microcontroller C++ software that is included in this repository, and exits. 
 
-... Documentation W.I.P. ...
+Navigate to the microcontroller driver folder
+```shell
+cd /home/ras/ras_ros_low_level_systems/microcontroller_driver
+```
+Build the docker container. Let the installer container do its thing
+```shell
+docker compose build; docker compose up
+```
