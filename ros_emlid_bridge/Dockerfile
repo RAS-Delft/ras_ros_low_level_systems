@@ -5,6 +5,8 @@ ARG ROS_DISTRO=iron
 # Use the official ROS 2 image
 FROM ros:${ROS_DISTRO}-ros-base
 
+ENV VESSEL_ID=default
+
 # Copy the boid_ros_pkg directory into container ros2_ws/src
 COPY reach_ros_node/. /ros2_ws/src/reach_ros_node
 
@@ -16,4 +18,4 @@ RUN . /opt/ros/${ROS_DISTRO}/setup.sh && \
 # Set tasks to be run upon container startup
 CMD . /opt/ros/${ROS_DISTRO}/setup.sh && \
     . /ros2_ws/install/setup.sh && \
-    ros2 run reach_ros_node nmea_tcp_driver --ros-args -p host:=192.168.2.15 -p port:=9001 -r __ns:=/RAS_TN_DB -r tcpfix:=telemetry/gnss/fix -r tcpvel:=telemetry/gnss/tcpvel -r tcptime:=telemetry/gnss/tcptime
+    ros2 run reach_ros_node nmea_tcp_driver --ros-args -p host:=192.168.2.15 -p port:=9001 -r __ns:=/${VESSEL_ID} -r tcpfix:=telemetry/gnss/fix -r tcpvel:=telemetry/gnss/tcpvel -r tcptime:=telemetry/gnss/tcptime

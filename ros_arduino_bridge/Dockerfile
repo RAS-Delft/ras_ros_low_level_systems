@@ -1,10 +1,11 @@
 
 # Get argument ROS_DISTRO from the build command or set default value
 ARG ROS_DISTRO=iron
-ARG VESSEL_ID=boat
 
 # Use the official ROS 2 image
 FROM ros:${ROS_DISTRO}-ros-base
+
+ENV VESSEL_ID=default
 
 # Install additional packages
  RUN apt-get update && apt-get install -y \
