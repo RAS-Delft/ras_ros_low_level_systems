@@ -122,3 +122,34 @@ Build the docker container. Let the installer container do its thing
 ```shell
 docker compose build; docker compose up
 ```
+
+### GNSS setup
+The GNSS system from Emlid does need some setup on a new device. Connect it and we should be able to identify its name when it pops up in the latest usb events
+```shell
+sudo dmesg | grep -i usb
+```
+```
+...
+[ 2254.571711] usb 1-1.1: Product: ReachM2
+[ 2254.571725] usb 1-1.1: Manufacturer: Emlid
+[ 2254.584195] cdc_ether 1-1.1:1.0 usb0: register 'cdc_ether' at usb-0000:01:00.0-1.1, CDC Ethernet Device, ee:57:0b:ce:14:b3
+[ 2254.592001] cdc_acm 1-1.1:1.2: ttyACM0: USB ACM device
+[ 2254.624507] cdc_ether 1-1.1:1.0 enxee570bce14b3: renamed from usb0
+
+```
+Our devicename here is `enxee570bce14b3`
+
+Activate the connection
+```shell
+sudo ip link set enxee570bce14b3 up
+```
+
+Assign an IP address to the Raspberry Pi's network interface. This IP should be in the same subnet as your USB device, but not conflicting with 192.168.2.15. For example, assign 192.168.2.1
+```shell
+sudo ifconfig enxee570bce14b3 192.168.2.1 netmask 255.255.255.0 up
+```
+
+Finally:
+```shell
+ping 192.168.2.15
+```
