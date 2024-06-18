@@ -63,7 +63,8 @@ ssh-copy-id ras@192.168.1.3
 Install Docker
 ```shell
 snap install docker
-sudo groupadd docker # Give docker sudo access. Might need relog to apply.
+sudo groupadd docker # Give docker sudo access. 
+sudo usermod -aG docker ${USER} # Add current user to docker group. Might need relog to apply.
 ```
 
 (optional) install network debug tools
