@@ -125,6 +125,16 @@ docker compose build; docker compose up
 
 ### GNSS setup
 The GNSS system from Emlid does need some setup on a new device. Connect it and we should be able to identify its name when it pops up in the latest usb events
+
+Check if leds on the receiver are all on. Check if you can already access the network adress to the gnss:
+```shell
+ping 192.168.2.15
+```
+
+Alternatively, `ifconfig` lists the network to the receiver as a semi random name, but similar to `enx7ee4720f03c4`.
+
+If it is not pingable or listed, we try finding the network device:
+
 ```shell
 sudo dmesg | grep -i usb
 ```
@@ -137,19 +147,34 @@ sudo dmesg | grep -i usb
 [ 2254.624507] cdc_ether 1-1.1:1.0 enxee570bce14b3: renamed from usb0
 
 ```
-Our devicename here is `enxee570bce14b3`
+Our devicename here is `enxee570bce14b3` which we want to use later on.
 
-Activate the connection
+Alternatively it could be listed with: (here `enxdaa7eb798e93`)
+```
+ip link list
+```
+```
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp1s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc mq state DOWN mode DEFAULT group default qlen 1000
+    link/ether 80:ee:73:f1:5e:e2 brd ff:ff:ff:ff:ff:ff
+4: wlp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
+    link/ether 70:66:55:b1:da:0a brd ff:ff:ff:ff:ff:ff
+5: enxdaa7eb798e93: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP mode DEFAULT group default qlen 1000
+    link/ether da:a7:eb:79:8e:93 brd ff:ff:ff:ff:ff:ff
+```
+
+Activate the connection if state=DOWN
 ```shell
 sudo ip link set enxee570bce14b3 up
 ```
 
-Assign an IP address to the Raspberry Pi's network interface. This IP should be in the same subnet as your USB device, but not conflicting with 192.168.2.15. For example, assign 192.168.2.1
+Assign an IP address to the Raspberry Pi's network interface. This IP should be in the same subnet as your USB device, but not conflicting with default receiver adress:192.168.2.15. For example, assign 192.168.2.1
 ```shell
 sudo ifconfig enxee570bce14b3 192.168.2.1 netmask 255.255.255.0 up
 ```
 
-Finally:
+Finally you should be able to access the emlid (that is by default reachable on `192.168.2.15` . You might need to reboot for settings to apply):
 ```shell
 ping 192.168.2.15
 ```
