@@ -72,6 +72,36 @@ sudo usermod -aG docker ${USER} # Add current user to docker group. Might need r
 sudo apt install net-tools
 ```
 
+### Configure WiFi
+In 2024 we set it up as follows. For connecting initially ethernet is a convenient option. 
+ssh onto a ship computer and configure using netplan. once logged in edit the network setup file, or create it if it does not exist:
+``` shell
+sudo nano /etc/netplan/50-cloud-init.yaml
+```
+
+Watch indentation. Working settings were as follows. Copy/edit required parts
+``` yaml
+# This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init's
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    ethernets:
+        eth0:
+            dhcp4: true
+            optional: true
+    version: 2
+    wifis:
+        wlan0:
+            access-points:
+                NETGEAR21:
+                    password: fill_in_actual_password_here_without_quotes
+            dhcp4: true
+            optional: true
+```
+Then reboot or use ```sudo netplan apply``
+
 ### Prepare modules 
 All major components are stored in the ras homefolder (`/home/ras`).
 Add the configuration file for this drone, where we set the major settings for this device.
